@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea Unificada de Ingeniería Web</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            line-height: 1.6; 
+            background-image: url('../../images/6106991.jpg'); /* Fondo con imagen */
+            background-size: cover; /* Ajustar la imagen al tamaño de la pantalla */
+            background-attachment: fixed; /* Hacer que la imagen permanezca fija al hacer scroll */
+            background-position: center; /* Centrar la imagen */
+            background-repeat: no-repeat; /* Evitar que la imagen se repita */
+            color: white; /* Color blanco para el texto */
+            text-align: center; /* Centrar el texto */
+        }
+
+        /* Aplicar un fondo borroso */
+        ::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('../../images/6106991.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(5px); /* Ajustar el nivel de borrosidad aquí */
+            z-index: -1; /* Colocar detrás del contenido */
+        }
+
+        table { 
+            border-collapse: collapse; 
+            margin: 20px auto; /* Centrando la tabla */
+            background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente para la tabla */
+            color: white; /* Color blanco para el texto de la tabla */
+        }
+        th, td { 
+            border: 1px solid white; /* Cambiar el color de la frontera a blanco */
+            padding: 10px; 
+        }
+        img { 
+            margin: 10px; 
+        }
+
+        /* Botón Regresar */
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #457B9D; /* Color de fondo */
+            color: white; /* Color del texto */
+            border-radius: 5px; /* Bordes redondeados */
+            text-decoration: none; /* Sin subrayado */
+            transition: background-color 0.3s, transform 0.3s; /* Transición suave */
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: rgba(128, 128, 128, 0.5); /* Fondo gris plomo transparente */
+            transform: scale(1.1); /* Aumentar tamaño al pasar el ratón */
+        }
+
+    </style>
+    <script>
+        // Función para obtener y mostrar la fecha actual del sistema (PC del usuario)
+        function mostrarFechaActual() {
+            const fecha = new Date();
+            const dia = String(fecha.getDate()).padStart(2, '0');
+            const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11
+            const anio = fecha.getFullYear();
+            const fechaFormateada = `${dia}-${mes}-${anio}`;
+            
+            document.getElementById("fecha").innerText = "Fecha actual: " + fechaFormateada;
+        }
+
+        // Llamar a la función cuando cargue la página
+        window.onload = mostrarFechaActual;
+    </script>
+</head>
+<body>
+    <h1>Tarea Unificada de Ingeniería Web</h1>
+
+    <!-- Ejemplo 1: Tabla -->
+    <h2>1. Tabla de Ejemplo</h2>
+    <table>
+        <tr>
+            <th colspan="3">Encabezado de tabla</th>
+        </tr>
+        <tr>
+            <td rowspan="2">Celda que ocupa dos filas</td>
+            <td>Celda 1</td>
+            <td>Celda 2</td>
+        </tr>
+        <tr>
+            <td>Celda 3</td>
+            <td>Celda 4</td>
+        </tr>
+    </table>
+
+    <h2>2. Imágenes e Hipervínculos</h2>
+    <a href="#php-info"><img src="img/PHPL.png" alt="PHP Logo" height="100" width="100"></a>
+    <a href="#java-info"><img src="img/JAVAL.png" alt="Java Logo" height="100" width="100"></a>
+
+    <div id="php-info">
+        <h3>PHP</h3>
+        <p>PHP es un lenguaje de programación de uso general que se adapta especialmente al desarrollo web.</p>
+    </div>
+
+    <div id="java-info">
+        <h3>Java</h3>
+        <p>Java es un lenguaje de programación y una plataforma informática que fue comercializada por primera vez en 1995 por Sun Microsystems.</p>
+    </div>
+
+    <h2>3. Párrafos con Diferentes Niveles de Énfasis</h2>
+    <p><strong><em>Este es el párrafo más enfatizado.</em></strong></p>
+    <p><em>Este párrafo tiene un énfasis medio.</em></p>
+    <p><em>Este párrafo también tiene un énfasis medio.</em></p>
+    <p><em>Este es el párrafo con menor énfasis.</em></p>
+
+    <p id="fecha"></p>
+
+    <!-- Botón Regresar -->
+    <a href="../../index.html" class="btn">Regresar</a>
+</body>
+</html>

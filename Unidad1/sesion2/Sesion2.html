@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplos de Animaciones CSS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            position: relative; /* Para permitir el posicionamiento absoluto */
+            overflow: hidden; /* Evitar scroll */
+            height: 100vh; /* Usar toda la altura de la ventana */
+            color: white; /* Color del texto */
+        }
+
+        /* Estilo del fondo */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('images/6106991.jpg'); /* Imagen de fondo */
+            background-size: cover; /* Ajustar la imagen al tamaño de la pantalla */
+            background-position: center; /* Centrar la imagen */
+            z-index: -1; /* Colocar detrás del contenido */
+        }
+
+        .content {
+            position: relative; /* Asegurar que el contenido esté por encima */
+            z-index: 1; /* Elevar el nivel de z-index del contenido */
+            background-color: rgba(0, 0, 0, 0.7); /* Fondo negro transparente */
+            padding: 20px; /* Espaciado interno */
+            border-radius: 10px; /* Bordes redondeados */
+            text-align: center; /* Centrar el texto */
+        }
+
+        h2 {
+            margin-top: 30px;
+        }
+
+        #growing-airplane {
+            cursor: pointer;
+            height: 24px;
+            width: 40px;
+            transition: all 3s;
+        }
+
+        #growing-airplane.growing {
+            height: 240px;
+            width: 400px;
+        }
+
+        .circle {
+            position: fixed; /* Cambiar a posición fija para que se muestren sobre el fondo */
+            transition-property: width, height;
+            transition-duration: 2s;
+            border-radius: 50%;
+            background-color: rgba(255, 0, 0, 0.5); /* Rojo transparente */
+            color: white; /* Color del texto dentro del círculo */
+            display: flex; /* Para centrar texto */
+            align-items: center; /* Centrar verticalmente */
+            justify-content: center; /* Centrar horizontalmente */
+            z-index: 2; /* Asegurar que los círculos estén encima del fondo y del contenido */
+        }
+
+        #problem1-button {
+            font-size: 16px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+
+        #problem1-button.clicked {
+            font-size: 24px;
+            background-color: #ff0000;
+            color: white;
+        }
+
+        .reset-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #FF8C00; /* Color del botón de reiniciar */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Botón Regresar */
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #457B9D; /* Color de fondo */
+            color: white; /* Color del texto */
+            border-radius: 5px; /* Bordes redondeados */
+            text-decoration: none; /* Sin subrayado */
+            transition: background-color 0.3s, transform 0.3s; /* Transición suave */
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: rgba(128, 128, 128, 0.5); /* Fondo gris plomo transparente */
+            transform: scale(1.1); /* Aumentar tamaño al pasar el ratón */
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Ejemplos de Animaciones CSS</h1>
+
+        <h2>1. Avión en crecimiento</h2>
+        <img id="growing-airplane" src="img/avion.webp" alt="Avión">
+        <div id="airplane-message"></div>
+
+        <h2>2. Círculo animado</h2>
+        <button onclick="showCircle()">Mostrar círculo</button>
+
+        <h2>3. Círculo animado con callback</h2>
+        <button onclick="showCircleWithCallback(showCircleText)">Mostrar círculo con texto</button>
+
+        <h2>4. Problema 1: Botón con transición</h2>
+        <button id="problem1-button">Haz clic aquí</button>
+
+        <button class="reset-button" onclick="reset()">Restablecer</button>
+
+        <!-- Botón Regresar -->
+        <a href="../../index.html" class="btn">Regresar</a>
+    </div>
+
+    <script>
+        // Ejemplo 1: Avión en crecimiento
+        document.getElementById('growing-airplane').onclick = function() {
+            this.classList.toggle('growing'); // Cambiar entre clases para crecer y volver
+            const message = document.getElementById('airplane-message');
+            if (this.classList.contains('growing')) {
+                setTimeout(() => {
+                    message.textContent = '¡Listo!';
+                }, 3000);
+            } else {
+                message.textContent = ''; // Limpiar el mensaje al volver
+            }
+        };
+
+        // Ejemplo 2: Círculo animado en posiciones aleatorias
+        function showCircle() {
+            const radius = 50; // Radio del círculo
+            const x = Math.random() * (window.innerWidth - radius * 2);
+            const y = Math.random() * (window.innerHeight - radius * 2);
+            let div = document.createElement('div');
+            div.style.width = 0;
+            div.style.height = 0;
+            div.style.left = x + 'px';
+            div.style.top = y + 'px';
+            div.className = 'circle';
+            document.body.append(div); // Añadir al body
+
+            setTimeout(() => {
+                div.style.width = radius * 2 + 'px';
+                div.style.height = radius * 2 + 'px';
+            }, 0);
+        }
+
+        // Ejemplo 3: Círculo animado con callback en posiciones aleatorias
+        function showCircleWithCallback(callback) {
+            const radius = 50; // Radio del círculo
+            const x = Math.random() * (window.innerWidth - radius * 2);
+            const y = Math.random() * (window.innerHeight - radius * 2);
+            let div = document.createElement('div');
+            div.style.width = 0;
+            div.style.height = 0;
+            div.style.left = x + 'px';
+            div.style.top = y + 'px';
+            div.className = 'circle';
+            document.body.append(div); // Añadir al body
+
+            setTimeout(() => {
+                div.style.width = radius * 2 + 'px';
+                div.style.height = radius * 2 + 'px';
+            }, 0);
+
+            div.ontransitionend = function() {
+                div.ontransitionend = null;
+                callback(div);
+            };
+        }
+
+        function showCircleText(div) {
+            let span = document.createElement('span');
+            span.textContent = '¡Círculo completado!';
+            div.append(span);
+        }
+
+        // Ejemplo 4: Problema 1 - Botón con transición
+        document.getElementById('problem1-button').addEventListener('click', function() {
+            this.classList.toggle('clicked');
+        });
+
+        // Función para restablecer
+        function reset() {
+            const circles = document.querySelectorAll('.circle');
+            circles.forEach(circle => circle.remove()); // Eliminar todos los círculos
+            document.getElementById('growing-airplane').classList.remove('growing'); // Regresar el avión a su tamaño original
+            document.getElementById('airplane-message').textContent = ''; // Limpiar mensaje
+            document.getElementById('problem1-button').classList.remove('clicked'); // Restablecer el botón
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Asistencias</title>
+
+    <!-- Enlace a Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/vector-gratis/fondo-realista-estilo-futurista_23-2149129125.jpg?t=st=1727454818~exp=1727458418~hmac=dc1581c44961ce651d29891c7d27506f94e262abd4e853cad3f36e19e6490f37&w=740');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 600px;
+            max-width: 100%;
+            margin: 50px auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #212121;
+            color: white;
+        }
+
+        .btn-edit, .btn-delete {
+            padding: 5px 10px;
+            color: white;
+            cursor: pointer;
+            border: none;
+            margin-right: 5px;
+        }
+
+        .btn-edit {
+            background-color: #28a745;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+
+<body>
+   
+<div class="container mt-5">
+        <div class="form-container">
+            <h1>Formulario Asistencia</h1>
+            <form id="asistenciaForm" onsubmit="guardarAsistencia(event)">
+                <input type="hidden" id="index" name="index">
+                <div class="form-group">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre del estudiante" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fecha" class="form-label">Fecha</label>
+                    <input type="date" id="fecha" name="fecha" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="estado" class="form-label">Estado</label>
+                    <select id="estado" name="estado" class="form-select" required>
+                        <option value="Presente">Presente</option>
+                        <option value="Ausente">Ausente</option>
+                        <option value="Tarde">Tarde</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn">Guardar Asistencia</button>
+            </form>
+
+            <h2>Lista de Asistencias</h2>
+            <table id="tablaAsistencias">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="listaAsistencias"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        // Función para cargar asistencias desde localStorage
+        function cargarAsistencias() {
+            const asistencias = JSON.parse(localStorage.getItem('asistencias')) || [];
+            const listaAsistencias = document.getElementById('listaAsistencias');
+            listaAsistencias.innerHTML = '';
+            asistencias.forEach((asistencia, index) => {
+                listaAsistencias.innerHTML += `
+                    <tr>
+                        <td>${asistencia.nombre}</td>
+                        <td>${asistencia.fecha}</td>
+                        <td>${asistencia.estado}</td>
+                        <td>
+                            <button class="btn-edit" onclick="editarAsistencia(${index})">Editar</button>
+                            <button class="btn-delete" onclick="eliminarAsistencia(${index})">Eliminar</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        // Función para guardar una asistencia
+        function guardarAsistencia(event) {
+            event.preventDefault();
+            const asistencias = JSON.parse(localStorage.getItem('asistencias')) || [];
+            const index = document.getElementById('index').value;
+
+            const nuevaAsistencia = {
+                nombre: document.getElementById('nombre').value,
+                fecha: document.getElementById('fecha').value,
+                estado: document.getElementById('estado').value
+            };
+
+            if (index === "") {
+                // Si es una nueva asistencia
+                asistencias.push(nuevaAsistencia);
+            } else {
+                // Si es una edición
+                asistencias[index] = nuevaAsistencia;
+            }
+
+            localStorage.setItem('asistencias', JSON.stringify(asistencias));
+            cargarAsistencias();
+            document.getElementById('asistenciaForm').reset();
+            document.getElementById('index').value = "";
+        }
+
+        // Función para eliminar una asistencia
+        function eliminarAsistencia(index) {
+            const asistencias = JSON.parse(localStorage.getItem('asistencias'));
+            asistencias.splice(index, 1);
+            localStorage.setItem('asistencias', JSON.stringify(asistencias));
+            cargarAsistencias();
+        }
+
+        // Función para editar una asistencia
+        function editarAsistencia(index) {
+            const asistencias = JSON.parse(localStorage.getItem('asistencias'));
+            const asistencia = asistencias[index];
+
+            document.getElementById('nombre').value = asistencia.nombre;
+            document.getElementById('fecha').value = asistencia.fecha;
+            document.getElementById('estado').value = asistencia.estado;
+            document.getElementById('index').value = index;
+        }
+
+        // Cargar asistencias al inicio
+        document.addEventListener('DOMContentLoaded', cargarAsistencias);
+    </script>
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>

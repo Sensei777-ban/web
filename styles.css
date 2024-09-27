@@ -1,0 +1,116 @@
+/* Reseteo de estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #a9d6e5; /* Color de fondo por si la imagen no se carga */
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Imagen de fondo sin desenfoque usando pseudo-elemento */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('images/6106991.jpg'); /* Ruta a tu imagen */
+    background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
+    background-repeat: no-repeat; /* No repetir la imagen */
+    background-position: center; /* Centrar la imagen */
+    z-index: -1; /* Colocar detrás del contenido */
+    opacity: 0.6; /* Ajustar la opacidad para que no sea muy oscura */
+}
+
+/* Estilos del contenedor principal */
+.container {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semitransparente */
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidad */
+    border-radius: 10px; /* Bordes redondeados */
+    z-index: 1; /* Asegurar que el contenido esté sobre la imagen de fondo */
+}
+
+/* Estilos de encabezados */
+h1, h2, h3 {
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 1); /* Cambiado a blanco sólido */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Sombra para que el texto se vea mejor */
+}
+
+/* Cambiar el h3 (que antes era amarillo) a blanco */
+h3 {
+    color: white; /* Ahora blanco */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Sombra para mejorar visibilidad sobre el fondo */
+}
+
+/* Estilos para el menú */
+.menu {
+    list-style: none;
+    padding: 0;
+}
+
+.menu > li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+/* Botones de las unidades */
+.unit-button {
+    padding: 10px 20px;
+    background-color: #1D3557;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 10px;
+}
+
+.unit-button:hover {
+    background-color: rgba(128, 128, 128, 0.7); /* Cambiado a gris plomo transparente al hacer hover */
+    transform: scale(1.1); /* Efecto de agrandar ligeramente al hacer hover */
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: #F1FAEE;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+}
+
+.menu > li:hover .submenu {
+    display: block;
+}
+
+.submenu li {
+    margin: 0;
+    padding: 0;
+}
+
+.submenu li a {
+    display: block;
+    padding: 10px;
+    background-color: #457B9D;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Corregido el efecto hover para los botones del submenu */
+.submenu li a:hover {
+    background-color: rgba(128, 128, 128, 0.7); /* Fondo gris plomo transparente para que no tape la letra */
+    color: white; /* Mantener el texto blanco */
+}

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Personal</title>
+
+    <!-- Enlace a Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/vector-gratis/fondo-realista-estilo-futurista_23-2149129125.jpg?t=st=1727454818~exp=1727458418~hmac=dc1581c44961ce651d29891c7d27506f94e262abd4e853cad3f36e19e6490f37&w=740');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 600px;
+            max-width: 100%;
+            margin: 50px auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .img-preview {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            margin-top: 15px;
+            display: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="form-container">
+            <h1>Formulario Personal</h1>
+            <form id="personalForm" onsubmit="event.preventDefault();">
+                <!-- Nombres -->
+                <div class="mb-3">
+                    <label for="nombres" class="form-label">Nombres</label>
+                    <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Ingresa tu nombre" required>
+                </div>
+
+                <!-- DNI -->
+                <div class="mb-3">
+                    <label for="dni" class="form-label">DNI</label>
+                    <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingresa tu DNI" required>
+                </div>
+
+                <!-- Edad -->
+                <div class="mb-3">
+                    <label for="edad" class="form-label">Edad</label>
+                    <input type="number" class="form-control" id="edad" name="edad" placeholder="Ingresa tu edad" required>
+                </div>
+
+                <!-- Dirección -->
+                <div class="mb-3">
+                    <label for="direccion" class="form-label">Dirección</label>
+                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingresa tu dirección" required>
+                </div>
+
+                <!-- Sexo -->
+                <div class="mb-3">
+                    <label class="form-label">Sexo</label>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sexo" id="sexoM" value="M" required>
+                            <label class="form-check-label" for="sexoM">M</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sexo" id="sexoF" value="F" required>
+                            <label class="form-check-label" for="sexoF">F</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- E-Mail -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-Mail (opcional)</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Correo (opcional)">
+                </div>
+
+                <!-- Estado Civil -->
+                <div class="mb-3">
+                    <label for="estadoC" class="form-label">Estado Civil</label>
+                    <select class="form-select" id="estadoC" name="estadoC" required>
+                        <option selected disabled>Seleccionar...</option>
+                        <option value="1">Soltero</option>
+                        <option value="2">Casado</option>
+                        <option value="3">Divorciado</option>
+                    </select>
+                </div>
+
+                <!-- Observación -->
+                <div class="mb-3">
+                    <label for="observacion" class="form-label">Observación</label>
+                    <textarea class="form-control" id="observacion" name="observacion" rows="3" placeholder="Escribe una observación (opcional)"></textarea>
+                </div>
+
+                <!-- Botones -->
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn">Enviar</button>
+                    <button type="reset" class="btn btn-secondary">Limpiar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>
